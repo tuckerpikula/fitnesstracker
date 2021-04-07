@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Workout } = require('../models')
 
 
-// get all workouts
+// gets all workouts
 router.get('/workouts', (req, res) => {
   Workout.find()
     .then(workouts => res.json(workouts))
@@ -14,7 +14,7 @@ router.get('/workouts/range', (req, res) => {
     .catch(err => console.log(err))
 })
 
-// create a workout
+// creates a workout
 router.post('/workouts', (req, res) => {
   Workout.create({})
     .then((workout) => res.json(workout))
@@ -23,6 +23,7 @@ router.post('/workouts', (req, res) => {
 
 // get a workout by id
 router.get('/workout/:id', (req, res) =>
+// Workout.findById(req.params.id, {virtuals: true}, 
 {
   Workout.findById()
     .then(workout => res.json(workout))

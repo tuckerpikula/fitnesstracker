@@ -1,6 +1,6 @@
 const { model, Schema } = require('mongoose')
 
-const WorkoutSchema = new Schema ({
+const WorkoutSchema = new Schema({
   day: Date,
   exercises: [{
     type: {
@@ -17,19 +17,17 @@ const WorkoutSchema = new Schema ({
   }]
 })
 
-WorkoutSchema.set('toObject', {
-  virtuals: true
-})
-WorkoutSchema.set('toJSON', {
-  virtuals: true
-})
+WorkoutSchema.set('toObject', { virtuals: true })
+WorkoutSchema.set('toJSON', { virtuals: true })
 
-WorkoutSchema.virtual('duration').get(function () {
-  let totalDuration = 0
-  this.exercises.forEach(exercise => {
-    totalDuration += exercise.duration
+
+WorkoutSchema.virtual('duration')
+  .get(function () {
+    let totalDuration = 0
+    this.exercises.forEach(exercise => {
+      totalDuration += exercise.duration
+    })
+    return totalDuration
   })
-  return totalDuration
-})
 
 module.exports = model('Workout', WorkoutSchema)
